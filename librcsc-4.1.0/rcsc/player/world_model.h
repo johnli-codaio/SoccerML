@@ -559,6 +559,13 @@ private:
       \brief update intercept table
      */
     void updateInterceptTable();
+
+    /*!
+      Outputs the action and the state of the world after the action update.
+      Should theoretically store data to a necessary file. This will be the data used for later. 
+     */
+    void extractWorldData(const ActionEffector &act);
+
 public:
 
     /*!

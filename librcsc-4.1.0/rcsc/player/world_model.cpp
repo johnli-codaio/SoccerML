@@ -59,6 +59,8 @@
 #include <limits>
 #include <cassert>
 #include <cmath>
+#include <fstream>
+#include <iostream>
 
 // #define DEBUG_PRINT
 
@@ -296,7 +298,7 @@ WorldModel::WorldModel()
     }
 }
 
-/*-------------------------------------------------------------------*/
+/*--------------------------WorldModel Class Method Definitions----------------------------*/
 /*!
 
 */
@@ -615,8 +617,10 @@ WorldModel::update( const ActionEffector & act,
 
     M_time = current;
 
-    // playmode is updated in updateJustBeforeDecision
+    // Write the data to a file
+    this->extractWorldData(act);
 
+    // playmode is updated in updateJustBeforeDecision
     M_self.update( act, current );
     M_ball.update( act, gameMode(), current );
 
@@ -4993,6 +4997,17 @@ WorldModel::getPlayerNearestTo( const Vector2D & point,
     }
 
     return p;
+}
+
+/*!
+  Outputs the action and the state of the world after the action update.
+  Should theoretically store data to a necessary file. This will be the data used for training.
+
+  To refrain from writing lots of code in one function, I will write out code in the player objects
+*/
+void WorldModel::extractWorldData(const ActionEffector &act) {
+  // First, print out some couts to see that this actually works lol.
+  std::cout << 'This is an update!!!!!' << std::endl;
 }
 
 }
