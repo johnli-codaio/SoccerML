@@ -1,2 +1,38 @@
+# Compressed Files
 *.tar.gz
-**/*.o
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+librcsc-4.1.0/.deps
+librcsc-4.1.0/.libs
+
+agent2d-3.1.1/src/sample_coach
+agent2d-3.1.1/src/sample_player
+agent2d-3.1.1/src/sample_trainer
