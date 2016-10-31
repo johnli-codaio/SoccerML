@@ -30,9 +30,34 @@
 *.out
 *.app
 
+# ./configure and make output
 .deps
 .libs
 
 sample_coach
 sample_player
 sample_trainer
+
+Makefile
+Doxyfile
+
+config.h
+config.log
+config.status
+
+autom4te.cache
+*.sh
+librcsc-config
+librcsc.pc
+librcsc.spec
+librcscenv
+libtool
+rcg2txt
+rcgrenameteam
+rcgresultprinter
+rcgreverse
+rcgverconv
+rcgversion
+rclmscheduler
+rclmtableprinter
+stamp-h1
