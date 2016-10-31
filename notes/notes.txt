@@ -1,0 +1,65 @@
+--------------------------------------------
+Deep reinforcement learning applied to RoboCup:
+https://arxiv.org/pdf/1511.04143.pdf
+
+Google Deepmind’s Go paper:
+http://airesearch.com/wp-content/uploads/2016/01/deepmind-mastering-go.pdf
+
+Google Deepmind’s Atari paper:
+https://www.cs.toronto.edu/~vmnih/docs/dqn.pdf
+
+Also, this is the website of the reinforcement learning book that I was talking about:
+https://webdocs.cs.ualberta.ca/~sutton/book/the-book.html
+
+
+
+Robocup Simulator: 
+https://sourceforge.net/projects/sserver/
+
+some installation instructions that could be helpful:
+https://wavepackage.wordpress.com/2013/06/07/how-to-install-the-robocup-soccer-server-2d/
+
+Some guide to install agent2D, which is open source code base that team named HELIOS released for other to develop upon:
+https://github.com/herodrigues/robocup2d/wiki/Installing-the-soccer-simulator
+
+
+
+Here you can find the link to the binaries of past teams, including some teams that did really well in previous Robo World cup 2d:
+https://storage.rcs-rds.ro/links/65e77935-12d6-42ff-bee8-cb268197ce99
+
+related, binaries of WrightEagle, champions and runner-up for 10 years in a row up until 2015:
+http://ai.ustc.edu.cn/en/robocup/2D/
+
+
+
+example of Robocup 2d simulation league, this is the final of the world cup 2014:
+https://www.youtube.com/watch?v=kRIygFjlD_Q
+
+OpenAI gym environment:
+https://gym.openai.com/envs#soccer
+related to OpenAI gym environment, this is the Half Field Offense package that Matthew Hausknecht developed:
+https://github.com/LARG/HFO
+
+Some python (not well-performing) implementation of robocup2d agents:
+https://github.com/jasontbradshaw/soccerpy
+https://github.com/kengz/robocup-soccer
+
+As this may come up at some point in the discussion tomorrow, I can want to send out this video as a teaser for further research direction: 
+https://www.youtube.com/watch?v=N6x-iRgXLEo
+--------------------------------------------
+
+
+
+
+
+dlog for librcsc writes to /tmp (probably requires --debug flag, set in ./train.sh but not ./start.sh)
+
+Maybe can use *.rcg files (rcssserver logs) as data collection?
+See rcg_output.cpp for details
+
+From the rcssserver manual:
+4.8.1 Description of the simulation algorithm 
+In Soccer Server, time is updated in discrete steps. A simulation step is 100ms. During each simulation step, objects (i.e. players and the ball) stay on their positions. If players decide to act within a step, actions are applied to the players and the ball at the transition from one simulation cycle to the next. Depending on the play mode, not all actions are allowed for the players (for instance in ‘before kick off’ mode, players can turn and move, but they cannot dash), so only allowed actions will be applied and take effect.
+If during a step, several players kick the ball, all the kicks are applied to the ball and a resulting acceleration is calculated. If the resulting acceleration is larger than the maximum acceleration for the ball, acceleration is normalized to its maximum value. After moving the objects, the server checks for collisions and updates velocities if a collision occurred (see also Sec. 4.4.2).
+When applying accelerations and velocities to the objects, the order of application is randomized. After changing objects positions, and updating velocities and accelerations, the automated referee checks the situation and changes the play mode or the object positions, if necessary. Changes to the play mode are announced immediately. Finally, stamina for each player is updated. 
+

@@ -61,3 +61,7 @@ rcgversion
 rclmscheduler
 rclmtableprinter
 stamp-h1
+
+# Server logs
+*.rcg
+*.rcl
