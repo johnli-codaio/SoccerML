@@ -223,6 +223,23 @@ SamplePlayer::initImpl( CmdLineParser & cmd_parser )
 void
 SamplePlayer::actionImpl()
 {
+    // tongcharlie
+    // testing output world state for each player
+    // {
+    //     const long & game_time = world().time().cycle();
+    //     const PlayerCont & teammates = world().teammates();
+
+    //     std::cerr << "[" << world().self().unum() << "]{t=" << game_time << "}";
+    //     for (std::list<PlayerObject>::const_iterator it=teammates.begin(); it != teammates.end(); ++it) {
+    //         const PlayerObject & _player = *it;
+    //         std::cerr << "(" << _player.unum()  << ","
+    //                          << _player.pos().x << ","
+    //                          << _player.pos().y << ")";
+    //     }
+    //     std::cerr << std::endl;
+    // }
+
+
     //
     // update strategy and analyzer
     //
