@@ -46,6 +46,9 @@ https://github.com/kengz/robocup-soccer
 
 As this may come up at some point in the discussion tomorrow, I can want to send out this video as a teaser for further research direction: 
 https://www.youtube.com/watch?v=N6x-iRgXLEo
+
+FYI - I should have included this earlier for your reference, some parts of this report give pretty good insight into how the rcserver works:
+http://www.csc.kth.se/utbildning/kth/kurser/DD143X/dkand13/Group10Pawel/report/t.andersson.p.nycander.finalreport.pdf
 --------------------------------------------
 
 
