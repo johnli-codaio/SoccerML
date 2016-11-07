@@ -72,6 +72,44 @@ def parse_file(in_file):
                 data[team][player_num].append((times, actions))
 
     return data
+ 
+# Returns array of dictionaries, where each dict contains each player's
+# actions at a given time step.
+# Format: {'time': int, 'teamname1': [action1, action2, ...], ...}
+# Ignore referee for now
+def parse_by_timestep(in_file):
+    data = []
+    timestep_data = {}
+
+    curr_time = 0
+    for line in in_file:
+        line_arr = line.strip().split(None, 2)
+
+        if line_arr[1] == "(referee":
+            continue
+        else:
+            # Check assumptions
+            assert(line_arr[1] == 'Recv')
+            assert(len(line_arr) == 3)
+
+            times = parse_times_tuple(line_arr[0])
+            time = times[0]
+
+	    if time != curr_time: # new time step
+                data.append(timestep_data)
+                timestep_data = {'time': time}
+		curr_time = time
+			
+	    event = line_arr[2].split(': ')
+            assert(len(event) == 2)
+            team, player_num = parse_player_info(event[0])
+            actions = parse_player_actions(event[1])
+			
+	    if actions:
+	        timestep_data[str(team) + str(player_num)] = actions
+
+    return data
+
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:
