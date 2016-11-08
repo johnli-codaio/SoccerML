@@ -1,7 +1,7 @@
 import sys
 import shlex
 
-RELEVANT_ACTIONS = {'turn', 'dash', 'turn_neck', 'move'}
+RELEVANT_ACTIONS = {'turn', 'dash', 'move', 'kick'}
 
 # Result format: [(time, subtime), 'action']
 def parse_ref_action(line):
