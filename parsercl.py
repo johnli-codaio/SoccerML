@@ -73,15 +73,13 @@ def parse_file(in_file):
 
     return data
  
-# Returns array of dictionaries, where each dict contains each player's
-# actions at a given time step.
-# Format: {'time': int, 'teamname1': [action1, action2, ...], ...}
-# Ignore referee for now
-def parse_by_timestep(in_file):
-    data = []
-    timestep_data = {}
+# Returns dict where 
+# key = an integer time step
+# value = a list of players, each represented by a tuple (team name, unum),
+# that kicked the ball at the given time step
+def parse_kicks(in_file):
+    data = {}
 
-    curr_time = 0
     for line in in_file:
         line_arr = line.strip().split(None, 2)
 
@@ -92,21 +90,19 @@ def parse_by_timestep(in_file):
             assert(line_arr[1] == 'Recv')
             assert(len(line_arr) == 3)
 
-            times = parse_times_tuple(line_arr[0])
-            time = times[0]
-
-	    if time != curr_time: # new time step
-                data.append(timestep_data)
-                timestep_data = {'time': time}
-		curr_time = time
-			
+            time = parse_times_tuple(line_arr[0])[0]
+		
 	    event = line_arr[2].split(': ')
             assert(len(event) == 2)
             team, player_num = parse_player_info(event[0])
             actions = parse_player_actions(event[1])
 			
 	    if actions:
-	        timestep_data[str(team) + str(player_num)] = actions
+                if "kick" in [a[0] for a in actions]:
+                    if time in data:
+                        data[time].append((team, player_num))
+                    else:
+                        data[time] = [(team, player_num)]
 
     return data
 
@@ -117,7 +113,7 @@ if __name__ == '__main__':
         sys.exit(-1)
 
     with open(sys.argv[1], 'r') as in_file, open(sys.argv[2], 'w') as out_file:
-        data = parse_file(in_file)
+        data = parse_kicks(in_file)
         out_file.write(str(data) + '\n')
 
   
