@@ -60,8 +60,6 @@ def parse(line):
     #   p['arm_getCounter']           = float(tokens[10])
     #   p['attentiontoCount']         = float(tokens[11])
 
-  if p:
-    d[p['side'] + str(p['unum'])] = p
   return d
 
 
