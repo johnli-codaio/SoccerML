@@ -113,7 +113,7 @@ if __name__ == '__main__':
         sys.exit(-1)
 
     with open(sys.argv[1], 'r') as in_file, open(sys.argv[2], 'w') as out_file:
-        data = parse_kicks(in_file)
+        data = parse_file(in_file)
         out_file.write(str(data) + '\n')
 
   
