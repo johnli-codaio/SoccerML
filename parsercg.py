@@ -108,11 +108,27 @@ def tostring(d):
 def parse_rcg(in_filename):
   with open(in_filename, 'r') as in_file:
     sequence = []
+
+    blacklist_times = []
+    blacklist_playmodes = ['goal_r', 'goal_l', 'foul_charge_l', 'foul_charge_r']
+    playmode = ''
+
     for line in in_file:
       if line.startswith('(show '):
         d = parse(line)
-        if int(d['time']) > len(sequence):
+        if playmode in blacklist_playmodes:
+          if int(d['time']) not in blacklist_times:
+            blacklist_times.append(int(d['time']))
+        else:
           sequence.append(tostring(d))
+
+      elif line.startswith('(playmode '):
+        playmode = line.split(' ')[2].strip(')\n')
+        if playmode in blacklist_playmodes:
+          blacklist_time = int(line.split(' ')[1])
+          blacklist_times.append(blacklist_time)
+
+    print blacklist_times
     return sequence
 
 
