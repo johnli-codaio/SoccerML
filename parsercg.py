@@ -78,15 +78,27 @@ if __name__ == '__main__':
   out_file = open(sys.argv[2], 'w')
 
   blacklist_time = 0
+  blacklist_times = []
+  blacklist_playmodes = ['goal_r', 'goal_l', 'foul_charge_l', 'foul_charge_r']
+  playmode = ""
+
   for line in in_file:
     if line.startswith('(show '):
       d = parse(line)
-      if d['time'] != blacklist_time:
+      if playmode in blacklist_playmodes:
+        if d['time'] not in blacklist_times:
+          blacklist_times.append(d['time'])
+      else:
         str_d = tostring(d)
         out_file.write(str_d + '\n')
 
     elif line.startswith('(playmode '):
-      blacklist_time = int(line.split(' ')[1])
-
+      playmode = line.split(' ')[2].strip(')\n')
+      if playmode in blacklist_playmodes:
+        blacklist_time = int(line.split(' ')[1])
+        blacklist_times.append(blacklist_time)
+      
     else:
       print line.strip()
+
+  print blacklist_times
