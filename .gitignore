@@ -65,3 +65,6 @@ stamp-h1
 # Server logs
 *.rcg
 *.rcl
+
+# python
+*.pyc
