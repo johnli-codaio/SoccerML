@@ -108,39 +108,6 @@ def parse_rcl(in_filename):
 
     return get_matrix(data), ref_actions
 
-# Returns dict where 
-# key = an integer time step
-# value = a list of players, each represented by a tuple (team name, unum),
-# that kicked the ball at the given time step
-def parse_kicks(in_file):
-    data = {}
-
-    for line in in_file:
-        line_arr = line.strip().split(None, 2)
-
-        if line_arr[1] == "(referee":
-            continue
-        else:
-            # Check assumptions
-            assert(line_arr[1] == 'Recv')
-            assert(len(line_arr) == 3)
-
-            time = parse_times_tuple(line_arr[0])[0]
-		
-	    event = line_arr[2].split(': ')
-        assert(len(event) == 2)
-        team, player_num = parse_player_info(event[0])
-        actions = parse_player_actions(event[1])
-
-        if actions:
-            if "kick" in [a[0] for a in actions]:
-                if time in data:
-                    data[time].append((team, player_num))
-                else:
-                    data[time] = [(team, player_num)]
-
-    return data
-
 # Takes in a dictionary of data and converts it into a matrix.
 # matrix[time][move_index] = val
 def get_matrix(data):
